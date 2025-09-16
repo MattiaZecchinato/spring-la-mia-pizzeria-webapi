@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <form th:fragment="searchBar(pathAction)" class="d-flex" role="search" th:action="@{|${pathAction}|}" method="get">
+        <input class="form-control me-2" name="pizzaName" type="search" placeholder="Search" aria-label="Search" />
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+</body>
+
+</html>

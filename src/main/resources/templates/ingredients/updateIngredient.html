@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Ingredient</title>
+    <th:block th:replace="~{fragments/styles :: bootstrap}"></th:block>
+</head>
+
+<body>
+    <header th:insert="~{fragments/navbar :: navbar}"></header>
+
+    <main>
+        <h1 class="text-center">Update Ingredient: [[${ingredient.name}]]</h1>
+        <div class="container">
+            <form th:object="${ingredient}" th:action="@{/ingredients/update/{id}(id=${ingredient.id})}" method="post">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" th:field="*{name}">
+                    <div th:if="${#fields.hasErrors('name')}">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('name')}">[[${err}]]</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" id="description" rows="3" th:field="*{description}"></textarea>
+                    <div th:if="${#fields.hasErrors('description')}">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('description')}">[[${err}]]</li>
+                        </ul>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pizza.name}"></title>
+    <th:block th:replace="~{fragments/styles :: bootstrap}"></th:block>
+</head>
+
+<body>
+    <header th:insert="~{fragments/navbar :: navbar}"></header>
+
+    <main>
+        <h1 class="text-center">[[${pizza.name}]]</h1>
+        <div th:insert="~{fragments/card :: card(${pizza})}" class="d-flex justify-content-center mt-4"></div>
+        <div th:insert="~{fragments/ingredientCard :: ingredientCard(${pizza})}"
+            class="d-flex justify-content-center mt-4">
+        </div>
+        <div th:insert="~{fragments/discountCard :: discountCard(${pizza})}" class="d-flex justify-content-center mt-4">
+        </div>
+    </main>
+</body>
+
+</html>

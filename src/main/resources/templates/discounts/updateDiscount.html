@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Discount</title>
+    <th:block th:replace="~{fragments/styles :: bootstrap}"></th:block>
+</head>
+
+<body>
+    <header th:insert="~{fragments/navbar :: navbar}"></header>
+    <main>
+        <h1 class="text-center">Update Discount for [[${discount.pizza.getName()}]]</h1>
+        <div class="container">
+            <form th:fragment="form(path)" th:object="${discount}"
+                th:action="@{/discount/update/{id}(id=${discount.getId()})}" method="post">
+
+                <input type="hidden" th:field="*{pizza}">
+
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" th:field="*{title}">
+                    <div th:if="${#fields.hasErrors('title')}">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('title')}">[[${err}]]</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="value" class="form-label">Value</label>
+                    <input type="number" class="form-control" id="value" th:field="*{value}">
+                    <div th:if="${#fields.hasErrors('value')}">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('value')}">[[${err}]]</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="start-time" class="form-label">Start Time</label>
+                    <input type="date" class="form-control" id="start-time" th:field="*{startTime}">
+                    <div th:if="${#fields.hasErrors('startTime')}">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('startTime')}">[[${err}]]</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="end-time" class="form-label">End Time</label>
+                    <input type="date" class="form-control" id="end-time" th:field="*{endTime}">
+                    <div th:if="${#fields.hasErrors('endTime')}">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('endTime')}">[[${err}]]</li>
+                        </ul>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>

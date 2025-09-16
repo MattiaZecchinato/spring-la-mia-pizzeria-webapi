@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div th:fragment="card(item)" class="card" style="width: 18rem;" th:object="${item}">
+        <img th:src="@{*{urlImg}}" class="card-img-top" th:alt="*{name}">
+        <div class="card-body">
+            <h5 class="card-title">[[*{price}]]€</h5>
+            <p class="card-text">[[*{description}]]</p>
+            <div class="d-flex">
+                <a th:href="@{/pizzas/update/{id}(id=*{id})}" class="btn btn-primary">Edit</a>
+
+                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
+                <form th:action="@{/pizzas/delete/{id}(id=*{id})}" method="post">
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Are you sure you want to delete
+                                        it?</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-danger">Confirm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

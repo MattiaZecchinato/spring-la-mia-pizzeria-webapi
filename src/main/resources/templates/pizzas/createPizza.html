@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Pizza</title>
+    <th:block th:replace="~{fragments/styles :: bootstrap}"></th:block>
+</head>
+
+<body>
+    <header th:insert="~{fragments/navbar :: navbar}"></header>
+    <main>
+        <h1 class="text-center">Create Pizza</h1>
+        <div class="container">
+            <form th:object="${pizza}" th:action="@{/pizzas/create}" method="post">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" th:field="*{name}">
+                    <div th:if="${#fields.hasErrors('name')}">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('name')}">[[${err}]]</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="number" class="form-control" id="price" th:field="*{price}">
+                    <div th:if="${#fields.hasErrors('price')}">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('price')}">[[${err}]]</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="urlImg" class="form-label">Url Image</label>
+                    <input type="text" class="form-control" id="urlImg" th:field="*{urlImg}">
+                    <div th:if="${#fields.hasErrors('urlImg')}">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('urlImg')}">[[${err}]]</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" id="description" rows="3" th:field="*{description}"></textarea>
+                    <div th:if="${#fields.hasErrors('description')}">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('description')}">[[${err}]]</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Ingredients</label>
+                    <div th:each="ingredient : ${ingredientList}">
+                        <input type="checkbox" th:id="|ingredient-${ingredient.id}|" th:field="*{ingredients}"
+                            th:value="${ingredient.id}">
+                        <label th:for="|ingredient-${ingredient.id}|" class="form-label">[[${ingredient.name}]]</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>

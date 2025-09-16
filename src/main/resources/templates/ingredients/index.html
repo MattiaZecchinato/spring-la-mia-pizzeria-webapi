@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingredients</title>
+    <th:block th:replace="~{fragments/styles :: bootstrap}"></th:block>
+</head>
+
+<body>
+    <header th:insert="~{fragments/navbar :: navbar}"></header>
+
+    <h1 class="text-center">Ingredients List</h1>
+
+    <div class="d-flex flex-column align-items-center mt-3">
+        <h3 th:if="${ingredientsList.size() == 0}">No ingredients found</h3>
+        <th:block th:if="${ingredientsList.size() > 0}"
+            th:replace="~{fragments/list :: list(${ingredientsList}, '/ingredients')}">
+        </th:block>
+        <th:block th:replace="~{fragments/searchBar :: searchBar('/pizzas')}"></th:block>
+        <a th:href="@{/ingredients/create}" class="btn btn-primary mt-3">Add Ingredients</a>
+    </div>
+
+</body>
+
+</html>

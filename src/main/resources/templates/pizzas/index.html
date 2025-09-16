@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzas</title>
+    <th:block th:replace="~{fragments/styles :: bootstrap}"></th:block>
+</head>
+
+<body>
+    <header th:insert="~{fragments/navbar :: navbar}"></header>
+
+    <h1 class="text-center">Pizzas List</h1>
+
+    <div class="d-flex flex-column align-items-center mt-3">
+        <h3 th:if="${pizzasList.size() == 0}">No pizzas found</h3>
+        <th:block th:if="${pizzasList.size() > 0}" th:replace="~{fragments/list :: list(${pizzasList}, '/pizzas')}">
+        </th:block>
+        <th:block th:replace="~{fragments/searchBar :: searchBar('/pizzas')}"></th:block>
+        <a th:href="@{/pizzas/create}" class="btn btn-primary mt-3">Add Pizza</a>
+    </div>
+
+</body>
+
+</html>
